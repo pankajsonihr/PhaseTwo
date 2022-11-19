@@ -10,11 +10,18 @@
     /// </summary>
     class Player
     {
-        private const int MaxHealth = 100;
-        private int _health = MaxHealth;
-        private Inventory _inventory;
+        protected int _strength;
+        protected int _defence;
+        protected int _intelligence;
+        protected int _vitality;
+        protected int _luck;
+        protected int _weaponUse;
+        protected int _dodge;
+        protected const int MaxHealth = 100;
+        protected int _health = MaxHealth;
+        protected Inventory _inventory;
         float goldAmount;
-
+        public Player(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) { }
         /// <summary>
         /// Forwards the inventory's CURRENT weight
         /// </summary>
@@ -28,7 +35,7 @@
         public float InventoryMaxWeight() => _inventory.MaxWeight;
 
         /// <summary>
-        /// Forwards the inventory's CURRENT volume
+        /// Forwards the inventory's CURRENT volumee
         /// </summary>
         /// <returns> A float representing the inventory's CURRENT volume of items </returns>
         public float InventoryCurrentVolume() => _inventory.CurrentVolume;
@@ -167,6 +174,19 @@
             _health = 0;
             CauseOfDeath = cause;
         }
+    }
+
+    class Knight: Player
+    {
+        public Knight(int strength,int defence, int intelligence,int vitality,int luck, int weaponUse, int dodge) : base(strength,defence,intelligence,vitality,luck,weaponUse,dodge) { }
+    }
+    class Wizard:Player
+    {
+        public Wizard(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) : base(strength, defence, intelligence, vitality, luck, weaponUse, dodge) { }
+    }
+    class ValKery:Player
+    {
+        public ValKery(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) : base(strength, defence, intelligence, vitality, luck, weaponUse, dodge) { }
     }
 
     // Represents a location in the 2D game world, based on its row and column.
