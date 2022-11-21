@@ -21,7 +21,7 @@
 
             //Creates the player with their starter inventory
             Player player = new Player(new Location(0, 0), pack);
-
+            CharacterGenerator cg = new CharacterGenerator(player, @"D:\Cs\PhaseTwo\PhaseTwo\bin\Debug\net6.0\Player.json");
             //Creates the merchant
             Merchant merch1 = new Merchant(new Location(0, 0));
 

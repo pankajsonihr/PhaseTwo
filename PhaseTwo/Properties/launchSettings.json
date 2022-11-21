@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PhaseTwo": {
+      "commandName": "Project",
+      "commandLineArgs": "Player.json"
+    }
+  }
+}
