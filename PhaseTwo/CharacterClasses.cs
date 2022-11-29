@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection.Emit;
+using System.Xml.Linq;
 
 namespace PhaseTwo
 {
@@ -16,13 +12,12 @@ namespace PhaseTwo
 
     class Knight : Player
     {
-        protected EquipedItems _equipedItems;
         public Knight() : base(25, 18, 7, 13, 5, 25, 7) { _name = "Théoden Lord of the Mark"; _class = HeroClasses.Knight; _equipedItems = new EquipedItems(1, 8f, 6f); }
         public Knight(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) : base(strength, defence, intelligence, vitality, luck, weaponUse, dodge) { _name = "Knight"; _class = HeroClasses.Knight; _equipedItems = new EquipedItems(1, 8f, 6f); }
         public override bool EquipWeapon(int itemIndex)
         {
-            var item = _inventory.GetItemAtIndex(itemIndex-1);
-            if (item.GetType() == typeof(Sword)) 
+            var item = _inventory.GetItemAtIndex(itemIndex - 1);
+            if (item.GetType() == typeof(Sword))
             {
                 if (_equipedItems.Add(item))
                 {
@@ -41,20 +36,15 @@ namespace PhaseTwo
             }
             return false;
         }
-        public override string GetEquippedWeapons()
-        {
-            return _equipedItems.ToString();
-        }
     }
     class Wizard : Player
     {
-        protected EquipedItems _equipedItems;
         public Wizard() : base(15, 13, 25, 11, 9, 14, 13) { _name = "Saruman Lord of Isengard"; _class = HeroClasses.Wizard; _equipedItems = new EquipedItems(1, 6f, 8f); }
         public Wizard(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) : base(strength, defence, intelligence, vitality, luck, weaponUse, dodge) { _name = "Wizard"; _class = HeroClasses.Wizard; _equipedItems = new EquipedItems(1, 6f, 8f); }
 
         public override bool EquipWeapon(int itemIndex)
         {
-            var item = _inventory.GetItemAtIndex(itemIndex-1);
+            var item = _inventory.GetItemAtIndex(itemIndex - 1);
             if (item.GetType() == typeof(Staff))
             {
                 if (_equipedItems.Add(item))
@@ -74,53 +64,50 @@ namespace PhaseTwo
             }
             return false;
         }
-
-        public override string GetEquippedWeapons()
-        {
-            return _equipedItems.ToString();
-        }
     }
     class ValKery : Player
     {
-        protected EquipedItems _equipedItems;
         public ValKery() : base(30, 12, 9, 16, 8, 25, 9) { _name = "Gimli Lord of the Glittering Caves"; _class = HeroClasses.ValKery; _equipedItems = new EquipedItems(2, 14f, 10f); }
         public ValKery(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) : base(strength, defence, intelligence, vitality, luck, weaponUse, dodge) { _name = "ValKery"; _class = HeroClasses.ValKery; }
 
         public override bool EquipWeapon(int itemIndex)
         {
-            var item = _inventory.GetItemAtIndex(itemIndex - 1);
-            if (item.GetType() == typeof(Sword) || item.GetType() == typeof(Shield))
-            {
-                if (_equipedItems.Add(item))
-                {
-                    _inventory.RemoveAt(itemIndex);
-                    Console.WriteLine($"{_name} equiped {item}");
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine($"{_name} could not equip {item}. ");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"{_name} isn't capable of equiping {item}");
-            }
-            return false;
-        }
-
-        public override string GetEquippedWeapons()
-        {
-            return _equipedItems.ToString();
+            return _equipedItems.EquipItem(this, itemIndex);
         }
     }
 
     class EquipedItems : Inventory
     {
-        public EquipedItems(int maxCount, float maxWeight, float maxVolume) : base(maxCount,maxWeight,maxVolume) { }
+        public EquipedItems(int maxCount, float maxWeight, float maxVolume) : base(maxCount, maxWeight, maxVolume) { }
 
-      //  public EquipedWeapon();
+        public bool EquipItem(Player player, int itemIndex)
+        {
+            InventoryItem item = player.GetItemAtIndex(itemIndex - 1);
+            System.Type itemType = item.GetType();
 
+            HeroClasses playerClass = player.GetHeroClass();
+            string playerName = player.GetName();
+            List<System.Type> AllowedItemsList = AllowedItems.AllowedItemsDict[playerClass];
+
+            if (AllowedItemsList.Contains(itemType))
+            {
+                if (player.EquipItem(item))
+                {
+                    player.RemoveItemFromInventoryAt(itemIndex);
+                    Console.WriteLine($"{playerName} equiped {item}");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"{playerName} could not equip {item}. ");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{playerName} isn't capable of equiping {item}");
+            }
+            return false;
+        }
     }
 
     static class EquipementTester
@@ -167,14 +154,15 @@ namespace PhaseTwo
         }
     }
 
-    internal struct AllowedWeapons
+    internal struct AllowedItems
     {
-        public static readonly Dictionary<HeroClasses, List<InventoryItem>> AllowedWeaponsDict = new Dictionary<HeroClasses, List<InventoryItem>>
+        public static readonly Dictionary<HeroClasses, List<System.Type>> AllowedItemsDict = new Dictionary<HeroClasses, List<System.Type>>
         {
-            { HeroClasses.Knight, new List<InventoryItem>(){ new Sword() } },
-            { HeroClasses.Wizard, new List<InventoryItem>(){ new Staff() } },
-            { HeroClasses.ValKery, new List<InventoryItem>(){ new Axe(), new Shield() } }
+            { HeroClasses.Knight, new List<System.Type>(){ typeof(Sword) } },
+            { HeroClasses.Wizard, new List<System.Type>(){ typeof(Staff) } },
+            { HeroClasses.ValKery, new List<System.Type>(){ typeof(Axe), typeof(Shield) } }
         };
+
     }
 
     enum HeroClasses { Knight, Wizard, ValKery };

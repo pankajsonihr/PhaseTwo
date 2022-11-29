@@ -13,18 +13,19 @@ namespace PhaseTwo
     /// </summary>
     abstract class Player
     {
-        protected string _name;
-        protected HeroClasses _class;
-        protected int _strength;
-        protected int _defence;
-        protected int _intelligence;
-        protected int _vitality;
-        protected int _luck;
-        protected int _weaponUse;
-        protected int _dodge;
+        protected string _name { get; set; }
+        protected HeroClasses _class { get; set; }
+        protected int _strength { get; }
+        protected int _defence { get; }
+        protected int _intelligence { get; }
+        protected int _vitality { get; }
+        protected int _luck { get; }
+        protected int _weaponUse { get; }
+        protected int _dodge { get; }
         protected const int MaxHealth = 100;
         protected int _health = MaxHealth;
         protected Inventory _inventory;
+        protected EquipedItems _equipedItems;
         float goldAmount;
         public Player(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge)
         {
@@ -98,10 +99,13 @@ namespace PhaseTwo
         /// <returns> A float value representing the amount of gold the player has. </returns>
         public float GetGold() => goldAmount;
 
-        public string GetName()
-        {
-            return _name;
-        }
+        public bool EquipItem(InventoryItem item) => _equipedItems.Add(item);
+        public InventoryItem RemoveItemFromInventoryAt(int itemIndex) => _inventory.RemoveAt(itemIndex);
+
+        public string GetName() => _name;
+
+        public HeroClasses GetHeroClass() => _class;
+
         /// <summary>
         /// Updates the value of the players gold amount +/-
         /// player.UpdateGold(-5) to remove gold.
@@ -119,7 +123,11 @@ namespace PhaseTwo
             return false;
         }
 
-        public abstract string GetEquippedWeapons();
+        public string GetEquippedWeapons()
+        {
+            return _equipedItems.ToString();
+        }
+
         public abstract bool EquipWeapon(int itemIndex);
 
         public void Show()
@@ -132,6 +140,7 @@ namespace PhaseTwo
             Console.WriteLine("Weapon Use = " + _weaponUse);
             Console.WriteLine("Dodge = " + _dodge);
         }
+
         /// <summary>
         /// Gets the item at the given index
         /// </summary>
