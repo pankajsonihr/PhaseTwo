@@ -371,9 +371,6 @@ namespace PhaseTwo
                 player.Show();
                 }
             }
-            else
-            {
-
                 Console.WriteLine("Your imported player info is not valid please consider character values 1,2,3 will select Knight,Wizard,ValKery simultaneously.");
             }
         }
