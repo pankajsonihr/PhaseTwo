@@ -110,68 +110,6 @@ namespace PhaseTwo
                 }
                 i++;
             }
-            #region
-            //Console.WriteLine($"Please input your desired strength You can choose power upto: {maxPower} powers");
-            //localStrength = GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.");
-            //maxPower -= localStrength;
-            //Console.WriteLine($"Your strength is set to {localStrength}.");
-            //if (maxPower == 0)
-            //{
-            //    return (localStrength, localDefence, localIntelligence, localVitality, localLuck, localWeaponUse, localDodge);
-            //}
-
-            //Console.WriteLine($"Please input your desired defence You can choose power upto: {maxPower} powers");
-            //localDefence = GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.");
-            //maxPower -= localDefence;
-            //Console.WriteLine($"Your defence is set to {localDefence}.");
-            //if (maxPower == 0)
-            //{
-            //    return (localStrength, localDefence, localIntelligence, localVitality, localLuck, localWeaponUse, localDodge);
-            //}
-
-            //Console.WriteLine($"Please input your desired intelligence You can choose power upto: {maxPower} powers");
-            //localIntelligence = GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.");
-            //maxPower -= localIntelligence;
-            //Console.WriteLine($"Your intelligence is set to {localIntelligence}.");
-            //if (maxPower == 0)
-            //{
-            //    return (localStrength, localDefence, localIntelligence, localVitality, localLuck, localWeaponUse, localDodge);
-            //}
-
-            //Console.WriteLine($"Please input your desired vitality You can choose power upto: {maxPower} powers");
-            //localVitality = GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.");
-            //maxPower -= localVitality;
-            //Console.WriteLine($"Your vitality is set to {localVitality}.");
-            //if (maxPower == 0)
-            //{
-            //    return (localStrength, localDefence, localIntelligence, localVitality, localLuck, localWeaponUse, localDodge);
-            //}
-
-            //Console.WriteLine($"Please input your desired luck You can choose power upto: {maxPower} powers");
-            //localLuck = GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.");
-            //maxPower -= localLuck;
-            //Console.WriteLine($"Your luck is set to {localLuck}.");
-            //if (maxPower == 0)
-            //{
-            //   return (localStrength, localDefence, localIntelligence, localVitality, localLuck, localWeaponUse, localDodge);
-            //}
-            //Console.WriteLine($"Please input your desired weapon use You can choose power upto: {maxPower} powers");
-            //localWeaponUse = GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.");
-            //maxPower -= localWeaponUse;
-            //Console.WriteLine($"Your weapon use is set to {localWeaponUse}.");
-            //if (maxPower == 0)
-            //{
-            //    return (localStrength, localDefence, localIntelligence, localVitality, localLuck, localWeaponUse, localDodge);
-            //}
-            //Console.WriteLine($"Please input your desired dodge You can choose power upto: {maxPower} powers");
-            //localDodge = GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.");
-            //maxPower -= localDodge;
-            //Console.WriteLine($"Your dodge is set to {localDodge}.");
-            //if (maxPower == 0)
-            //{
-            //    return (localStrength, localDefence, localIntelligence, localVitality, localLuck, localWeaponUse, localDodge);
-            //}
-            #endregion
             return (attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6]);
         }
         /// <summary>
