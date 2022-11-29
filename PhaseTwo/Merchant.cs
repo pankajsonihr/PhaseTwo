@@ -249,7 +249,7 @@ namespace PhaseTwo
             InventoryItem item = player.GetItemAtIndex(itemIndex);
             float itemValue = item.Value;
 
-            if (player.GetGold() >= item.Value & _inventory.Add(item))
+            if (player.GetGold() >= item.Value & _inventory.Add(item))  //Change here
             {
                 player.RemoveItem(item);
                 goldAmount = goldAmount - item.Value;

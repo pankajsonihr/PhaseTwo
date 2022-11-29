@@ -51,7 +51,6 @@ namespace PhaseTwo
         {
             return false;
         }
-
         /// <summary>
         /// This method gets the item name
         /// </summary>
@@ -77,7 +76,6 @@ namespace PhaseTwo
         /// <param name="value"> The gold coin value of the sword </param>
         /// <param name="use"> The damage of the sword </param>
         public Weapon(ItemName name, float weight, float volume, float value, float use) : base(name,weight, volume, value, use) { }
-        
     }
 
     /// <summary>
@@ -186,13 +184,12 @@ namespace PhaseTwo
     /// <summary>
     /// The Sword class, derived from the Weapon class
     /// </summary>
-    class Sword : Weapon 
-    {
-        
+    class Sword : Weapon
+    {        
         /// <summary>
         /// The Sword constructor, with default values
         /// </summary>
-        public Sword() : base(ItemName.Sword, 3.8f, 5.6f, 14.99f, 40 ) { }
+        public Sword() : base(ItemName.Sword, 3.8f, 5.6f, 14.99f, 40) { }
 
         /// <summary>
         /// The method when using the item
@@ -206,10 +203,43 @@ namespace PhaseTwo
         }
     }
 
+    class Staff : Weapon
+    {
+        /// <summary>
+        /// The Staff constructor, with default values
+        /// </summary>
+        public Staff() : base(ItemName.Staff, 2.5f, 7f, 16.99f, 33) { }
+
+        public bool UseItem(Merchant merch)
+        {
+            Console.WriteLine($"Your sword accidentaly fell on {merch}");
+            return true;
+        }
+    }
+
+    class Axe : Weapon
+    {
+        /// <summary>
+        /// The Sword constructor, with default values
+        /// </summary>
+        public Axe() : base(ItemName.Axe, 3.8f, 5.6f, 14.99f, 40) { }
+
+        /// <summary>
+        /// The method when using the item
+        /// </summary>
+        /// <param name="merch"> The NPC to attack </param>
+        /// <returns> A boolean whether the sword was successfully used </returns>
+        public bool UseItem(Merchant merch)
+        {
+            Console.WriteLine($"Your axe accidentaly fell on {merch}");
+            return true;
+        }
+    }
+
     /// <summary>
     /// The sword class, derived from the weapon class
     /// </summary>
-    class Shield : Weapon 
+    class Shield : Weapon
     { 
         /// <summary>
         /// The shield constructor, with default values
@@ -260,6 +290,6 @@ namespace PhaseTwo
     /// </summary>
     enum ItemName
     {
-        Shield, HealingPotion, Map, Sword, RevengePotion, PoisonPotion
+        Shield, HealingPotion, Map, Sword, RevengePotion, PoisonPotion, Staff, Axe
     }
 }

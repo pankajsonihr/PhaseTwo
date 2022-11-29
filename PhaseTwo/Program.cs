@@ -18,20 +18,25 @@
             Inventory pack = new Inventory(packMaxItems, packMaxVolume, packMaxWeight);
             pack.Add(new Sword());
             pack.Add(new Map());
+            CharacterGenerator CG= new CharacterGenerator();
+            Hero player = CG.HeroGenerator(args[0]);//also work with string file location
+            Console.WriteLine($"You have chosen: {player.GetName()} Below is your chosen powers for player");
+            player.Show();
 
             //Creates the player with their starter inventory
-            Player player = new Player(new Location(0, 0), pack);
-            CharacterGenerator cg = new CharacterGenerator(player, @"D:\Cs\PhaseTwo\PhaseTwo\bin\Debug\net6.0\Player.json");
+            player.HeroAddLocationAndInventory(new Location(0, 0), pack);
             //Creates the merchant
-            Merchant merch1 = new Merchant(new Location(0, 0));
+            //Merchant merch1 = new Merchant(new Location(0, 0));
 
             //Interact with the player
-            merch1.Interact(player);
+            //merch1.Interact(player);
 
             //Creates the other 3 merchants
-            PotionMerchant potionMerchant = new PotionMerchant(new Location(0, 0));
-            ArmorMerchant armorMerchant = new ArmorMerchant(new Location(0, 0));
-            WeaponMerchant weaponMerchant = new WeaponMerchant(new Location(0, 0));
+            //PotionMerchant potionMerchant = new PotionMerchant(new Location(0, 0));
+            //ArmorMerchant armorMerchant = new ArmorMerchant(new Location(0, 0));
+            //WeaponMerchant weaponMerchant = new WeaponMerchant(new Location(0, 0));
+
+            EquipementTester.AddEquipment(player);
         }
     }
 }
