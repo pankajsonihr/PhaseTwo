@@ -169,7 +169,7 @@ namespace PhaseTwo
 
     public struct AllowedWeapons
     {
-        public static readonly Dictionary<HeroClasses, List<InventoryItem>> AllowedWeaponsDict = new Dictionary<HeroClasses, List<InventoryItem>>
+        public static readonly Dictionary<HeroClasses, List<InventoryItem>> dictionary = new Dictionary<HeroClasses, List<InventoryItem>>
         {
             { HeroClasses.Knight, new List<InventoryItem>(){ new Sword() } },
             { HeroClasses.Wizard, new List<InventoryItem>(){ new Staff() } },
