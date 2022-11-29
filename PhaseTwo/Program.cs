@@ -19,7 +19,7 @@
             pack.Add(new Sword());
             pack.Add(new Map());
             CharacterGenerator CG= new CharacterGenerator();
-            Hero player = CG.HeroGenerator(args[0]);//also work with string file location
+            Player player = CG.HeroGenerator(args[0]);//also work with string file location
             Console.WriteLine($"You have chosen: {player.GetName()} Below is your chosen powers for player");
             player.Show();
 
