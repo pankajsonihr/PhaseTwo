@@ -7,13 +7,9 @@ using System.Threading.Tasks;
 //This Part is created by Siva Sai and Pankaj
 namespace PhaseTwo
 {
-    interface ChooseAHero
+    static class CharacterGenerator
     {
-        Player HeroGenerator(string? file = null);
-    }
-    class CharacterGenerator:ChooseAHero
-    {
-        public Player HeroGenerator(string? file = null)
+        public static Player HeroGenerator(string? file = null)
         {
             try
             {
@@ -41,7 +37,7 @@ namespace PhaseTwo
                 return SelectHeroPreset();
             }
         }
-        Player SelectHeroPreset()
+        static Player SelectHeroPreset()
         {
             (int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) localData;
             Console.WriteLine("Which hero you would like to choose?\n1 For Knight\n2 For Wizard\n3 For ValKery");
@@ -96,7 +92,7 @@ namespace PhaseTwo
         /// this method will take all types of powers from user input and store them as tuple data type
         /// </summary>
         /// <returns>tuple variable having all user input powers for hero</returns>
-        (int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) Customisation()
+        static  (int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) Customisation()
         {
             int maxPower = 100;
             int i = 0;
@@ -183,7 +179,7 @@ namespace PhaseTwo
         /// </summary>
         /// <param name="file">file location where json file is located</param>
         /// <returns>a hero type inherted from Player</returns>
-        Player ImportHero(string file)
+        static Player ImportHero(string file)
         {
             int sum;
             string text = System.IO.File.ReadAllText(file);
@@ -237,7 +233,7 @@ namespace PhaseTwo
         /// <param name="max">maximum allowed userinput int value</param>
         /// <param name="errorMsg">Error message to be shown when user input is not valid</param>
         /// <returns>returns the sanitized int input value</returns>
-        private int GetSelection(int min, int max, string errorMsg)
+        private static int GetSelection(int min, int max, string errorMsg)
         {
             int? selection = SanitizeInput(Console.ReadLine(), min, max);
             while (selection == null)
@@ -254,7 +250,7 @@ namespace PhaseTwo
         /// <param name="min">minimum allowed userinput int value</param>
         /// <param name="max">maximum allowed userinput int value</param>
         /// <returns>returns the filtered int values that we need for specific task</returns>
-        public int? SanitizeInput(string input, int min, int max)
+        public static int? SanitizeInput(string input, int min, int max)
         {
             int result;
             if (int.TryParse(input, out result) && result >= min && result <= max)

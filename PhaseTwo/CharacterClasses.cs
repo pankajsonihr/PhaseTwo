@@ -119,7 +119,7 @@ namespace PhaseTwo
     {
         public EquipedItems(int maxCount, float maxWeight, float maxVolume) : base(maxCount,maxWeight,maxVolume) { }
 
-        public EquipedWeapon();
+      //  public EquipedWeapon();
 
     }
 
@@ -167,15 +167,15 @@ namespace PhaseTwo
         }
     }
 
-    //public struct AllowedWeapons
-    //{
-    //    public static readonly Dictionary<HeroClasses, List<InventoryItem>> AllowedWeaponsDict = new Dictionary<HeroClasses, List<InventoryItem>>
-    //    {
-    //        { HeroClasses.Knight, new List<InventoryItem>(){ new Sword() } },
-    //        { HeroClasses.Wizard, new List<InventoryItem>(){ new Staff() } },
-    //        { HeroClasses.ValKery, new List<InventoryItem>(){ new Axe(), new Shield() } }
-    //    };
-    //}
+    public struct AllowedWeapons
+    {
+        public static readonly Dictionary<HeroClasses, List<InventoryItem>> AllowedWeaponsDict = new Dictionary<HeroClasses, List<InventoryItem>>
+        {
+            { HeroClasses.Knight, new List<InventoryItem>(){ new Sword() } },
+            { HeroClasses.Wizard, new List<InventoryItem>(){ new Staff() } },
+            { HeroClasses.ValKery, new List<InventoryItem>(){ new Axe(), new Shield() } }
+        };
+    }
 
     enum HeroClasses { Knight, Wizard, ValKery };
 }
