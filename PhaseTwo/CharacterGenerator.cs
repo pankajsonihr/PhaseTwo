@@ -41,7 +41,7 @@ namespace PhaseTwo
         {
             (int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) localData;
             Console.WriteLine("Which hero you would like to choose?\n1 For Knight\n2 For Wizard\n3 For ValKery");
-            int selection = GetSelection(1, 3, "Our selection menu not getting what do you want to do?.");
+            int selection = ConsoleHelper.GetSelection(1, 3, "Our selection menu not getting what do you want to do?.");
             Player forShow;
             switch (selection)
             {
@@ -66,7 +66,7 @@ namespace PhaseTwo
                 default: //There is no default as we have filtered all values already
                     break;
             }
-            int selectionForCustomisation = GetSelection(1, 2, "Our customisation menu not getting what do you want to do?.");
+            int selectionForCustomisation = ConsoleHelper.GetSelection(1, 2, "Our customisation menu not getting what do you want to do?.");
             if (selectionForCustomisation == 1)
             {
                 localData = Customisation();
@@ -102,7 +102,7 @@ namespace PhaseTwo
             foreach (var item in options)
             {
                 Console.WriteLine($"Please input your desired {item} You can choose power upto: {maxPower} powers");
-                attributes[i]=GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.");
+                attributes[i]=ConsoleHelper.GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.");
                 maxPower -= attributes[i];
                 if (maxPower == 0)
                 {
@@ -222,40 +222,6 @@ namespace PhaseTwo
             else
             {
                 Console.WriteLine("Your imported player info is not valid please consider character values 1,2,3 will select Knight,Wizard,ValKery simultaneously.");
-            }
-            return null;
-        }
-        /// <summary>
-        /// this method take two integers, one is minimum and the other is maximum integer values entered by user it also have 
-        /// a string error message that will be shown when input is not in the given range
-        /// </summary>
-        /// <param name="min">minimum allowed userinput int value</param>
-        /// <param name="max">maximum allowed userinput int value</param>
-        /// <param name="errorMsg">Error message to be shown when user input is not valid</param>
-        /// <returns>returns the sanitized int input value</returns>
-        private static int GetSelection(int min, int max, string errorMsg)
-        {
-            int? selection = SanitizeInput(Console.ReadLine(), min, max);
-            while (selection == null)
-            {
-                Console.WriteLine(errorMsg);
-                selection = SanitizeInput(Console.ReadLine(), min, max);
-            }
-            return (int)selection; // 'selection' cannot be null here
-        }
-        /// <summary>
-        /// it will convert the string input value into integer input value and also checks that value is b/w min and max int value we have given
-        /// </summary>
-        /// <param name="input">string input to convert int value</param>
-        /// <param name="min">minimum allowed userinput int value</param>
-        /// <param name="max">maximum allowed userinput int value</param>
-        /// <returns>returns the filtered int values that we need for specific task</returns>
-        public static int? SanitizeInput(string input, int min, int max)
-        {
-            int result;
-            if (int.TryParse(input, out result) && result >= min && result <= max)
-            {
-                return result;
             }
             return null;
         }
