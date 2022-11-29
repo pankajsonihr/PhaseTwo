@@ -119,6 +119,9 @@ namespace PhaseTwo
             return false;
         }
 
+        public abstract string GetEquippedWeapons();
+        public abstract bool EquipWeapon(int itemIndex);
+
         public void Show()
         {
             Console.WriteLine("Strength = " + _strength);

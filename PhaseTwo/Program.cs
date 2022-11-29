@@ -6,6 +6,7 @@
     /// Nicholas St-Jacques - A00204011
     /// Rama Venkata Siva Sai Nuvvula - A00240120
     /// Pankaj - A00244692
+    /// Ruchit
     /// </summary>
     internal class Program
     {
@@ -18,13 +19,16 @@
             Inventory pack = new Inventory(packMaxItems, packMaxVolume, packMaxWeight);
             pack.Add(new Sword());
             pack.Add(new Map());
-            CharacterGenerator CG= new CharacterGenerator();
-            Player player = CG.HeroGenerator(args[0]);//also work with string file location
+            Player player = CharacterGenerator.HeroGenerator();
             Console.WriteLine($"You have chosen: {player.GetName()} Below is your chosen powers for player");
             player.Show();
 
             //Creates the player with their starter inventory
             player.HeroAddLocationAndInventory(new Location(0, 0), pack);
+            // Player player = new Player(new Location(0, 0), pack,ch.HeroGenerator(@""));
+
+
+            //  Player? player = cg.HeroGenerator(@"D:\Cs\PhaseTwo\PhaseTwo\bin\Debug\net6.0\Player.json", new Location(0, 0), pack);
             //Creates the merchant
             //Merchant merch1 = new Merchant(new Location(0, 0));
 
