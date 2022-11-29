@@ -9,17 +9,17 @@ namespace PhaseTwo
 {
     interface ChooseAHero
     {
-        Hero HeroGenerator(string? file = null);
+        Player HeroGenerator(string? file = null);
     }
     class CharacterGenerator:ChooseAHero
     {
-        public Hero HeroGenerator(string? file = null)
+        public Player HeroGenerator(string? file = null)
         {
             try
             {
                 if (file == null)
                 {
-                    Console.WriteLine("Notice: No Hero JSON file is available in parameter to take data.");
+                    Console.WriteLine("Notice: No Player JSON file is available in parameter to take data.");
                     return SelectHeroPreset();
                 }
                 else
@@ -41,7 +41,7 @@ namespace PhaseTwo
                 return SelectHeroPreset();
             }
         }
-        Hero SelectHeroPreset()
+        Player SelectHeroPreset()
         {
             (int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) localData;
             Console.WriteLine("Which hero you would like to choose?\n1 For Knight\n2 For Wizard\n3 For ValKery");
@@ -183,7 +183,7 @@ namespace PhaseTwo
         /// </summary>
         /// <param name="file">file location where json file is located</param>
         /// <returns>a hero type inherted from Player</returns>
-        Hero ImportHero(string file)
+        Player ImportHero(string file)
         {
             int sum;
             string text = System.IO.File.ReadAllText(file);
