@@ -91,7 +91,7 @@ namespace PhaseTwo
                     }
                     else if (choice == indexedInventory.itemCount)
                     {
-                        throw new System.Runtime.CompilerServices.SwitchExpressionException();
+                        throw new System.IndexOutOfRangeException();
                     }
                     else
                     {
@@ -103,7 +103,7 @@ namespace PhaseTwo
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("That is an invalid selection.");
                 }
-                catch (System.Runtime.CompilerServices.SwitchExpressionException)
+                catch (System.IndexOutOfRangeException)
                 {
                     Console.WriteLine("You close your inventory");
                     addmore = false;
