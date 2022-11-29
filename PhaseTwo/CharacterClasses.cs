@@ -3,38 +3,15 @@ using System.Xml.Linq;
 
 namespace PhaseTwo
 {
-    //abstract class Hero : Player
-    //{
-    //    protected EquipedItems _equipedItems;
-    //    protected Hero() : base(30, 12, 9, 16, 8, 25, 9) { _name = "Gimli Lord of the Glittering Caves"; _class = HeroClasses.ValKery; _equipedItems = new EquipedItems(2, 14f, 10f); }
-    //    protected Hero(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) : base(strength, defence, intelligence, vitality, luck, weaponUse, dodge) { _name = "Hero"; _class = HeroClasses.ValKery; _equipedItems = new EquipedItems(1, 8f, 6f); }
-    //}
 
     class Knight : Player
     {
         public Knight() : base(25, 18, 7, 13, 5, 25, 7) { _name = "Théoden Lord of the Mark"; _class = HeroClasses.Knight; _equipedItems = new EquipedItems(1, 8f, 6f); }
         public Knight(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) : base(strength, defence, intelligence, vitality, luck, weaponUse, dodge) { _name = "Knight"; _class = HeroClasses.Knight; _equipedItems = new EquipedItems(1, 8f, 6f); }
+
         public override bool EquipWeapon(int itemIndex)
         {
-            var item = _inventory.GetItemAtIndex(itemIndex - 1);
-            if (item.GetType() == typeof(Sword))
-            {
-                if (_equipedItems.Add(item))
-                {
-                    _inventory.RemoveAt(itemIndex);
-                    Console.WriteLine($"{_name} equiped {item}");
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine($"{_name} could not equip {item}. ");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"{_name} isn't capable of equiping {item}");
-            }
-            return false;
+            return _equipedItems.EquipItem(this, itemIndex);
         }
     }
     class Wizard : Player
@@ -44,25 +21,7 @@ namespace PhaseTwo
 
         public override bool EquipWeapon(int itemIndex)
         {
-            var item = _inventory.GetItemAtIndex(itemIndex - 1);
-            if (item.GetType() == typeof(Staff))
-            {
-                if (_equipedItems.Add(item))
-                {
-                    _inventory.RemoveAt(itemIndex);
-                    Console.WriteLine($"{_name} equiped {item}");
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine($"{_name} could not equip {item}. ");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"{_name} isn't capable of equiping {item}");
-            }
-            return false;
+            return _equipedItems.EquipItem(this, itemIndex);
         }
     }
     class ValKery : Player
