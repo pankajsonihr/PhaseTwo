@@ -167,7 +167,7 @@ namespace PhaseTwo
         }
     }
 
-    public struct AllowedWeapons
+    internal struct AllowedWeapons
     {
         public static readonly Dictionary<HeroClasses, List<InventoryItem>> AllowedWeaponsDict = new Dictionary<HeroClasses, List<InventoryItem>>
         {
