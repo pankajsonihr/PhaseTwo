@@ -91,7 +91,7 @@ namespace PhaseTwo
                     }
                     else if (choice == indexedInventory.itemCount)
                     {
-                        throw new System.IndexOutOfRangeException();
+                        throw new IndexOutOfRangeException();
                     }
                     else
                     {
@@ -113,7 +113,7 @@ namespace PhaseTwo
         }
     }
 
-    internal struct AllowedItems
+    public struct AllowedItems
     {
         public static readonly Dictionary<HeroClasses, List<System.Type>> AllowedItemsDict = new Dictionary<HeroClasses, List<System.Type>>
         {
@@ -121,8 +121,7 @@ namespace PhaseTwo
             { HeroClasses.Wizard, new List<System.Type>(){ typeof(Staff) } },
             { HeroClasses.ValKery, new List<System.Type>(){ typeof(Axe), typeof(Shield) } }
         };
-
     }
 
-    enum HeroClasses { Knight, Wizard, ValKery };
+    public enum HeroClasses { Knight, Wizard, ValKery };
 }
