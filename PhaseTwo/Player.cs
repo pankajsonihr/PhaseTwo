@@ -102,15 +102,44 @@ namespace PhaseTwo
         /// <returns> Bool value whether the item was found </returns>
         public bool PlayerContain(InventoryItem item) => _inventory.InventoryContain(item);
 
+        /// <summary>
+        /// Forwards True/False if the player has an item equiped
+        /// </summary>
+        /// <param name="item"> The inventory item to check on </param>
+        /// <returns> Bool value whether the item was found </returns>
         public bool IsItemEquipped(InventoryItem item) => _equipedItems.InventoryContain(item);
 
+        /// <summary>
+        /// Equip an item to the players _equippedItems inventory
+        /// </summary>
+        /// <param name="itemIndex"> The index of the item to equip </param>
+        /// <returns> True/False if the item is in the _equippedItems inventory </returns>
         public bool EquipItem(int itemIndex) => _equipedItems.EquipItem(this, itemIndex);
 
+        /// <summary>
+        /// Unequip an item from the players _equippedItems inventory
+        /// </summary>
+        /// <param name="itemIndex"> The index of the item to unequip </param>
+        /// <returns> True/False if the item was removed from the _equippedItems inventory </returns>
         public bool UnequipItem(int itemIndex) => _equipedItems.UnequipItem(this, itemIndex);
+
+        /// <summary>
+        /// Removes an item from the inventory at a given index
+        /// </summary>
+        /// <param name="itemIndex"> The index of the item to get </param>
+        /// <returns> The item found at the index </returns>
         public InventoryItem RemoveItemFromInventoryAt(int itemIndex) => _inventory.RemoveAt(itemIndex);
 
+        /// <summary>
+        /// Gets the players name
+        /// </summary>
+        /// <returns> The players name </returns>
         public string GetName() => _name;
 
+        /// <summary>
+        /// Gets the class of the player
+        /// </summary>
+        /// <returns> HeroClasses </returns>
         public HeroClasses GetHeroClass() => _class;
 
         /// <summary>
@@ -130,11 +159,18 @@ namespace PhaseTwo
             return false;
         }
 
+        /// <summary>
+        /// Get all equiped items
+        /// </summary>
+        /// <returns> a string containing all items </returns>
         public string GetEquippedWeapons()
         {
             return _equipedItems.ToString();
         }
 
+        /// <summary>
+        /// Shows stats
+        /// </summary>
         public void Show()
         {
             Console.WriteLine("Strength = " + _strength);
