@@ -15,14 +15,14 @@ namespace PhaseTwo
             {
                 if (file == null)
                 {
-                    Console.WriteLine("Notice: No Player JSON file is available in parameter to take data.");
+                    Console.WriteLine("Notice: No Player JSON file is available in parameter to take data.\n");
                     return SelectHeroPreset();
                 }
                 else
                 {
                     if (ImportHero == null)
                     {
-                        Console.WriteLine("Your imported File is not correct try again");
+                        Console.WriteLine("Your imported File is not correct try again\n");
                         throw new System.Runtime.CompilerServices.SwitchExpressionException();
                     }
                     else
@@ -40,33 +40,33 @@ namespace PhaseTwo
         static Player SelectHeroPreset()
         {
             (int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) localData;
-            Console.WriteLine("Which hero you would like to choose?\n1 For Knight\n2 For Wizard\n3 For ValKery");
-            int selection = ConsoleHelper.GetSelection(1, 3, "Our selection menu not getting what do you want to do?.");
+            Console.WriteLine("Which hero you would like to choose?\n1 For Knight\n2 For Wizard\n3 For ValKery\n");
+            int selection = ConsoleHelper.GetSelection(1, 3, "Our selection menu not getting what do you want to do?.\n");
             Player forShow;
             switch (selection)
             {
                 case 1:
-                    Console.WriteLine("You have chosen Knight. It has the following preset powers");
+                    Console.WriteLine("\nYou have chosen Knight. It has the following preset powers\n");
                     forShow = new Knight();
                     forShow.Show();
-                    Console.WriteLine($"Would you like to customise Knight according to your self or you want the preset powers?\n1 For Customisation\n2 For Default powers");
+                    Console.WriteLine($"\nWould you like to customise Knight according to your self or you want the preset powers?\n1 For Customisation\n2 For Default powers\n");
                     break;
                 case 2:
-                    Console.WriteLine("You have chosen Wizard. It has the following preset powers");
+                    Console.WriteLine("\nYou have chosen Wizard. It has the following preset powers\n");
                     forShow = new Wizard();
                     forShow.Show();
-                    Console.WriteLine($"Would you like to customise Wizard according to your self or you want the preset powers?\n1 For Customisation\n2 For Default powers");
+                    Console.WriteLine($"\nWould you like to customise Wizard according to your self or you want the preset powers?\n1 For Customisation\n2 For Default powers\n");
                     break;
                 case 3:
-                    Console.WriteLine("You have chosen Valkery. It has the following preset powers");
+                    Console.WriteLine("\nYou have chosen Valkery. It has the following preset powers\n");
                     forShow = new ValKery();
                     forShow.Show();
-                    Console.WriteLine($"Would you like to customise Valkery according to your self or you want the preset powers?\n1 For Customisation\n2 For Default powers");
+                    Console.WriteLine($"\nWould you like to customise Valkery according to your self or you want the preset powers?\n1 For Customisation\n2 For Default powers\n");
                     break;
                 default: //There is no default as we have filtered all values already
                     break;
             }
-            int selectionForCustomisation = ConsoleHelper.GetSelection(1, 2, "Our customisation menu not getting what do you want to do?.");
+            int selectionForCustomisation = ConsoleHelper.GetSelection(1, 2, "Our customisation menu not getting what do you want to do?.\n");
             if (selectionForCustomisation == 1)
             {
                 localData = Customisation();
@@ -97,12 +97,12 @@ namespace PhaseTwo
             int maxPower = 100;
             int i = 0;
             int[] attributes = new int[7];
-            string[] options = new string[] { "strength", "defence", "intelligence", "vitality","luck", "weaponUse", "dodge" };
+            string[] options = new string[] { "strength", "defence", "intelligence", "vitality","luck", "weaponUse", "dodge\n" };
 
             foreach (var item in options)
             {
-                Console.WriteLine($"Please input your desired {item} You can choose power upto: {maxPower} powers");
-                attributes[i]=ConsoleHelper.GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.");
+                Console.WriteLine($"Please input your desired {item} You can choose power upto: {maxPower} powers\n");
+                attributes[i]=ConsoleHelper.GetSelection(0, maxPower, "Our customisation menu not getting what do you want to do?.\n");
                 maxPower -= attributes[i];
                 if (maxPower == 0)
                 {
@@ -128,7 +128,7 @@ namespace PhaseTwo
                 
                 if (sum > 100)
                 {
-                    Console.WriteLine("You have imported more power than allowed power");
+                    Console.WriteLine("You have imported more power than allowed power\n");
                 }
                 else
                 {
@@ -139,7 +139,7 @@ namespace PhaseTwo
             {
                 if (sum > 100 || sum < 0)
                 {
-                    Console.WriteLine("You have imported more power than allowed power");
+                    Console.WriteLine("You have imported more power than allowed power\n");
                 }
                 else
                 {
@@ -150,7 +150,7 @@ namespace PhaseTwo
             {
                 if (sum > 100 || sum < 0)
                 {
-                    Console.WriteLine("You have imported more power than allowed power");
+                    Console.WriteLine("You have imported more power than allowed power\n");
                 }
                 else
                 {
@@ -159,7 +159,7 @@ namespace PhaseTwo
             }
             else
             {
-                Console.WriteLine("Your imported player info is not valid please consider character values 1,2,3 will select Knight,Wizard,ValKery simultaneously.");
+                Console.WriteLine("Your imported player info is not valid please consider character values 1,2,3 will select Knight,Wizard,ValKery simultaneously.\n");
             }
             return null;
         }

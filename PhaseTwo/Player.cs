@@ -22,6 +22,7 @@ namespace PhaseTwo
         protected int _luck { get; }
         protected int _weaponUse { get; }
         protected int _dodge { get; }
+
         protected const int MaxHealth = 100;
         protected int _health = MaxHealth;
         protected Inventory _inventory;
@@ -80,13 +81,8 @@ namespace PhaseTwo
         /// <returns> A string with item names, index in the inventory, and their respective values </returns>
         public (string items, int itemCount) GetIndexedInventory() => _inventory.GetIndexedInventory();
 
-        /// <summary>
-        /// Forwards True/False if the players inventory contains the specified item
-        /// </summary>
-        /// <param name="item"> The inventory item to check on </param>
-        /// <returns> Bool value whether the item was found </returns>
-        public bool PlayerContain(InventoryItem item) => _inventory.InventoryContain(item);
-
+        public (string items, int itemCount) GetIndexedEquipment() => _equipedItems.GetIndexedInventory();
+        
         /// <summary>
         /// Forwards the inventory's total value of the items contained within it.
         /// </summary>
@@ -99,7 +95,18 @@ namespace PhaseTwo
         /// <returns> A float value representing the amount of gold the player has. </returns>
         public float GetGold() => goldAmount;
 
-        public bool EquipItem(InventoryItem item) => _equipedItems.Add(item);
+        /// <summary>
+        /// Forwards True/False if the players inventory contains the specified item
+        /// </summary>
+        /// <param name="item"> The inventory item to check on </param>
+        /// <returns> Bool value whether the item was found </returns>
+        public bool PlayerContain(InventoryItem item) => _inventory.InventoryContain(item);
+
+        public bool IsItemEquipped(InventoryItem item) => _equipedItems.InventoryContain(item);
+
+        public bool EquipItem(int itemIndex) => _equipedItems.EquipItem(this, itemIndex);
+
+        public bool UnequipItem(int itemIndex) => _equipedItems.UnequipItem(this, itemIndex);
         public InventoryItem RemoveItemFromInventoryAt(int itemIndex) => _inventory.RemoveAt(itemIndex);
 
         public string GetName() => _name;
@@ -127,8 +134,6 @@ namespace PhaseTwo
         {
             return _equipedItems.ToString();
         }
-
-        public abstract bool EquipWeapon(int itemIndex);
 
         public void Show()
         {

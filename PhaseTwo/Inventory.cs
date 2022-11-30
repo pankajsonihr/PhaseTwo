@@ -145,7 +145,7 @@ namespace PhaseTwo
         /// </summary>
         /// <param name="item"> An instance of the desired InventoryItem </param>
         /// <returns> The index of the item in the inventory </returns>
-        private int FindItemIndex(InventoryItem item)
+        public int FindItemIndex(InventoryItem item)
         {
             for (int i = 0; i < _items.Count; ++i)
             {
@@ -190,7 +190,7 @@ namespace PhaseTwo
         /// <returns> A string value representing the items in the inventory </returns>
         public override string ToString()
         {
-            if (_items.Count == 0) return "{\n\tEmpty\n}";
+            if (_items.Count == 0) return "{\n\tEmpty\n}\n";
             string ret = "{";
             foreach (InventoryItem item in _items)
             {

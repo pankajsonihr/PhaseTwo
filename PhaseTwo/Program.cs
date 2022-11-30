@@ -41,6 +41,7 @@
             //WeaponMerchant weaponMerchant = new WeaponMerchant(new Location(0, 0));
 
             EquipementTester.AddEquipment(player);
+            EquipementTester.RemoveEquipment(player);
         }
     }
 }

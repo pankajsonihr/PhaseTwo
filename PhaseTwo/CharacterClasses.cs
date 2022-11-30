@@ -8,31 +8,16 @@ namespace PhaseTwo
     {
         public Knight() : base(25, 18, 7, 13, 5, 25, 7) { _name = "Théoden Lord of the Mark"; _class = HeroClasses.Knight; _equipedItems = new EquipedItems(1, 8f, 6f); }
         public Knight(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) : base(strength, defence, intelligence, vitality, luck, weaponUse, dodge) { _name = "Knight"; _class = HeroClasses.Knight; _equipedItems = new EquipedItems(1, 8f, 6f); }
-
-        public override bool EquipWeapon(int itemIndex)
-        {
-            return _equipedItems.EquipItem(this, itemIndex);
-        }
     }
     class Wizard : Player
     {
         public Wizard() : base(15, 13, 25, 11, 9, 14, 13) { _name = "Saruman Lord of Isengard"; _class = HeroClasses.Wizard; _equipedItems = new EquipedItems(1, 6f, 8f); }
         public Wizard(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) : base(strength, defence, intelligence, vitality, luck, weaponUse, dodge) { _name = "Wizard"; _class = HeroClasses.Wizard; _equipedItems = new EquipedItems(1, 6f, 8f); }
-
-        public override bool EquipWeapon(int itemIndex)
-        {
-            return _equipedItems.EquipItem(this, itemIndex);
-        }
     }
     class ValKery : Player
     {
         public ValKery() : base(30, 12, 9, 16, 8, 25, 9) { _name = "Gimli Lord of the Glittering Caves"; _class = HeroClasses.ValKery; _equipedItems = new EquipedItems(2, 14f, 10f); }
         public ValKery(int strength, int defence, int intelligence, int vitality, int luck, int weaponUse, int dodge) : base(strength, defence, intelligence, vitality, luck, weaponUse, dodge) { _name = "ValKery"; _class = HeroClasses.ValKery; }
-
-        public override bool EquipWeapon(int itemIndex)
-        {
-            return _equipedItems.EquipItem(this, itemIndex);
-        }
     }
 
     class EquipedItems : Inventory
@@ -41,7 +26,8 @@ namespace PhaseTwo
 
         public bool EquipItem(Player player, int itemIndex)
         {
-            InventoryItem item = player.GetItemAtIndex(itemIndex - 1);
+            itemIndex--;
+            InventoryItem item = player.GetItemAtIndex(itemIndex);
             System.Type itemType = item.GetType();
 
             HeroClasses playerClass = player.GetHeroClass();
@@ -50,20 +36,39 @@ namespace PhaseTwo
 
             if (AllowedItemsList.Contains(itemType))
             {
-                if (player.EquipItem(item))
+                if (Add(item))
                 {
                     player.RemoveItemFromInventoryAt(itemIndex);
-                    Console.WriteLine($"{playerName} equiped {item}");
+                    Console.WriteLine($"\n{playerName} equiped {item}\n");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine($"{playerName} could not equip {item}. ");
+                    Console.WriteLine($"\n{playerName} could not equip {item}.\n");
                 }
             }
             else
             {
-                Console.WriteLine($"{playerName} isn't capable of equiping {item}");
+                Console.WriteLine($"\n{playerName} isn't capable of equiping {item}\n");
+            }
+            return false;
+        }
+
+        public bool UnequipItem(Player player, int itemIndex)
+        {
+            itemIndex--;
+            string playerName = player.GetName();
+            InventoryItem item = GetItemAtIndex(itemIndex);
+
+            if (InventoryContain(item))
+            {
+                RemoveAt(itemIndex);
+                Console.WriteLine($"\n{playerName} unequiped {item}\n");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine($"\n{playerName} does not have {item} equipped.\n");
             }
             return false;
         }
@@ -79,7 +84,7 @@ namespace PhaseTwo
                 (string items, int itemCount) indexedInventory = player.GetIndexedInventory();
                 Console.WriteLine("You current have these items equiped:\n");
                 Console.WriteLine(player.GetEquippedWeapons());
-                Console.WriteLine("Which item would you like to equip from your inventory?\n");
+                Console.WriteLine("Which item would you like to equip?\n");
                 Console.WriteLine(indexedInventory);
                 Console.WriteLine($"\t{indexedInventory.itemCount}\t-\tExit\n");
                 try
@@ -87,7 +92,7 @@ namespace PhaseTwo
                     int choice = Convert.ToInt32(Console.ReadLine());
                     if (choice >= 1 & choice <= indexedInventory.itemCount - 1)
                     {
-                        player.EquipWeapon(choice);
+                        player.EquipItem(choice);
                     }
                     else if (choice == indexedInventory.itemCount)
                     {
@@ -101,15 +106,56 @@ namespace PhaseTwo
                 catch (FormatException)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("That is an invalid selection.");
+                    Console.WriteLine("That is an invalid selection.\n");
                 }
                 catch (System.IndexOutOfRangeException)
                 {
-                    Console.WriteLine("You close your inventory");
+                    Console.WriteLine("You close your inventory\n");
                     addmore = false;
                 }
                 Console.ResetColor();
             } while (addmore);
+        }
+
+        public static void RemoveEquipment(Player player)
+        {
+            bool remmore = true;
+            do
+            {
+                (string items, int itemCount) indexedEquipment = player.GetIndexedEquipment();
+                Console.WriteLine("You current have these items equipped:\n");
+                Console.WriteLine(player.GetEquippedWeapons());
+                Console.WriteLine("Which item would you like to unequip from your inventory?\n");
+                Console.WriteLine(indexedEquipment);
+                Console.WriteLine($"\t{indexedEquipment.itemCount}\t-\tExit\n");
+                try
+                {
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    if (choice >= 1 & choice <= indexedEquipment.itemCount - 1)
+                    {
+                        player.UnequipItem(choice);
+                    }
+                    else if (choice == indexedEquipment.itemCount)
+                    {
+                        throw new IndexOutOfRangeException();
+                    }
+                    else
+                    {
+                        throw new FormatException();
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("That is an invalid selection.\n");
+                }
+                catch (System.IndexOutOfRangeException)
+                {
+                    Console.WriteLine("You close your inventory\n");
+                    remmore = false;
+                }
+                Console.ResetColor();
+            } while (remmore);
         }
     }
 
